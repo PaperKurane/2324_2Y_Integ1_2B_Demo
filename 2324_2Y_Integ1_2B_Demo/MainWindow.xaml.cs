@@ -24,6 +24,7 @@ namespace _2324_2Y_Integ1_2B_Demo
         int num1 = 0;
         int num2 = 0;
         int ope = -1;
+        bool equate = false;
 
         public MainWindow()
         {
@@ -44,6 +45,17 @@ namespace _2324_2Y_Integ1_2B_Demo
 
         private void addNumbers(int num)
         {
+            if (equate == true)
+            {
+                num1 = 0;
+                num2 = 0;
+                equate = false;
+                tbCalc.Clear();
+                tbHist.Clear();
+            }
+
+            History(num.ToString());
+
             string thing = tbCalc.Text;
             thing += num;
 
@@ -117,36 +129,44 @@ namespace _2324_2Y_Integ1_2B_Demo
         {
             ope = 0;
             tbCalc.Text = "";
+            History(" + ");
         }
 
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
             ope = 1;
             tbCalc.Text = "";
+            History(" - ");
         }
 
         private void btnMul_Click(object sender, RoutedEventArgs e)
         {
             ope = 2;
             tbCalc.Text = "";
+            History(" * ");
         }
 
         private void btnDiv_Click(object sender, RoutedEventArgs e)
         {
             ope = 3;
             tbCalc.Text = "";
+            History(" / ");
         }
         private void btnFac_Click(object sender, RoutedEventArgs e)
         {
             ope = 4;
             tbCalc.Text = "";
+            History("!");
             btnAns_Click(sender, e);
         }
         #endregion
 
         private void btnAns_Click(object sender, RoutedEventArgs e)
         {
-            switch(ope) 
+            equate = true;
+            History("null");
+
+            switch (ope) 
             {
                 case 0:
                     num1 += num2;
@@ -161,12 +181,12 @@ namespace _2324_2Y_Integ1_2B_Demo
                     num1 /= num2;
                     break;
                 case 4:
-                    int thing = 1;
+                    int ans = 1;
                     for (int x = num1; x > 0; x--)
                     {
-                         thing *= x;
+                         ans *= x;
                     }
-                    num1 = thing;
+                    num1 = ans;
                     break;
             }
 
@@ -174,8 +194,15 @@ namespace _2324_2Y_Integ1_2B_Demo
             {
                 tbCalc.Text = num1.ToString();
                 ope = -1;
-                num2 = 0;
             }
+        }
+
+        private void History(string input)
+        {
+            if (equate == true)
+                tbHist.Text = tbHist.Text + " =";
+            else
+                tbHist.Text = tbHist.Text + input;
         }
     }
 }
