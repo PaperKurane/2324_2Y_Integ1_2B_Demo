@@ -42,16 +42,8 @@ namespace _2324_2Y_Integ1_2B_Demo
             btnAns.Content = "=";
         }
 
-        private void History(string input)
-        {
-            List<string> hist = new List<string>();
-            hist.Add(input);
-        }
-
         private void addNumbers(int num)
         {
-            History(num.ToString());
-
             string thing = tbCalc.Text;
             thing += num;
 
