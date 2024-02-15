@@ -155,8 +155,12 @@ namespace _2324_2Y_Integ1_2B_Demo
                     break;
             }
 
-            tbCalc.Text = num1.ToString();
-            ope = -1;
+            if (ope > -1)
+            {
+                tbCalc.Text = num1.ToString();
+                ope = -1;
+                num2 = 0;
+            }
         }
     }
 }
