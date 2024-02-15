@@ -29,7 +29,7 @@ namespace _2324_2Y_Integ1_2B_Demo
         {
             InitializeComponent();
 
-            numPad = new Button[] { btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
+            numPad = new Button[] { btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9 };
 
             for (int x = 0; x < numPad.Length; x++)
                 numPad[x].Content = x;
@@ -38,11 +38,20 @@ namespace _2324_2Y_Integ1_2B_Demo
             btnMin.Content = "-";
             btnMul.Content = "x";
             btnDiv.Content = "/";
+            btnFac.Content = "!";
             btnAns.Content = "=";
+        }
+
+        private void History(string input)
+        {
+            List<string> hist = new List<string>();
+            hist.Add(input);
         }
 
         private void addNumbers(int num)
         {
+            History(num.ToString());
+
             string thing = tbCalc.Text;
             thing += num;
 
@@ -134,7 +143,13 @@ namespace _2324_2Y_Integ1_2B_Demo
         {
             ope = 3;
             tbCalc.Text = "";
-        } 
+        }
+        private void btnFac_Click(object sender, RoutedEventArgs e)
+        {
+            ope = 4;
+            tbCalc.Text = "";
+            btnAns_Click(sender, e);
+        }
         #endregion
 
         private void btnAns_Click(object sender, RoutedEventArgs e)
@@ -152,6 +167,14 @@ namespace _2324_2Y_Integ1_2B_Demo
                     break;
                 case 3:
                     num1 /= num2;
+                    break;
+                case 4:
+                    int thing = 1;
+                    for (int x = num1; x > 0; x--)
+                    {
+                         thing *= x;
+                    }
+                    num1 = thing;
                     break;
             }
 
